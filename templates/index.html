@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gold Price Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url("{{ url_for('static', filename='Gold.png') }}");
+            background-size: cover;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: rgba(255, 255, 255, 0.9); /* White color background with transparency */
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2, h3 {
+            color: #333;
+            text-align: center;
+        }
+        form {
+            margin-bottom: 30px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        input[type="text"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #ffbf00;
+            color: #333;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: block;
+            margin: 0 auto;
+        }
+        input[type="submit"]:hover {
+            background-color: #cca300;
+        }
+        .prediction-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .prediction-container h2 {
+            color: #ffbf00;
+            font-size: 28px;
+        }
+        .prediction-container h3 {
+            color: #333;
+            font-size: 18px;
+        }
+        /* Example image placeholder style */
+        .image-placeholder {
+            width: 100%;
+            max-width: 400px;
+            margin: 20px auto;
+            border-radius: 6px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Gold Price Prediction</h1>
+        <form action="/predict" method="post">
+            <label for="Open">Open (Gold ETF):</label><br>
+            <input type="text" id="Open" name="Open" required><br><br>
+
+            <label for="High">High (Gold ETF):</label><br>
+            <input type="text" id="High" name="High" required><br><br>
+
+            <label for="Low">Low (Gold ETF):</label><br>
+            <input type="text" id="Low" name="Low" required><br><br>
+
+            <label for="Close">Close (Gold ETF):</label><br>
+            <input type="text" id="Close" name="Close" required><br><br>
+
+            <label for="Volume">Volume (Gold ETF):</label><br>
+            <input type="text" id="Volume" name="Volume" required><br><br>
+
+            <label for="SP_close">S&P 500 Close:</label><br>
+            <input type="text" id="SP_close" name="SP_close" required><br><br>
+
+            <label for="DJ_close">Dj Close:</label><br>
+            <input type="text" id="DJ_close" name="DJ_close" required><br><br>
+
+            <label for="OF_Price">Gold Options Price:</label><br>
+            <input type="text" id="OF_Price" name="OF_Price" required><br><br>
+
+            <label for="OS_Price">Silver Options Price:</label><br>
+            <input type="text" id="OS_Price" name="OS_Price" required><br><br>
+
+            <label for="USDI_Price">US Dollar Index Price:</label><br>
+            <input type="text" id="USDI_Price" name="USDI_Price" required><br><br>
+
+            <label for="GDX_Close">GDX Close (Gold Miners ETF):</label><br>
+            <input type="text" id="GDX_Close" name="GDX_Close" required><br><br>
+
+            <label for="OF_Volume">Gold Options Volume:</label><br>
+            <input type="text" id="OF_Volume" name="OF_Volume" required><br><br>
+
+            <input type="submit" value="Check Price">
+        </form>
+
+        <div class="prediction-container">
+            {% if prediction %}
+            <h2>Predicted Gold Price is: {{ prediction }} $</h2>
+            <h3>Inference time: {{ inference_time }} seconds</h3>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
